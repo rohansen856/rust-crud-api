@@ -1,4 +1,4 @@
-use actix_web::{get, http::StatusCode, post, web::Query, HttpResponse, Responder};
+use actix_web::{get, http::StatusCode, post, web::Query, HttpRequest, HttpResponse, Responder};
 use validator::Validate;
 use serde::{Deserialize, Serialize};
 
@@ -15,12 +15,12 @@ pub struct GetStudentRoutineByDay {
 }
 
 #[get("/getStudentRoutineByDay")]
-async fn get_student_routine_by_day(query: Query<GetStudentRoutineByDay>) -> impl Responder {
+async fn get_student_routine_by_day(req: HttpRequest, query: Query<GetStudentRoutineByDay>) -> impl Responder {
     let request: GetStudentRoutineByDay = query.into_inner();
     let is_valid = request.validate();
     match is_valid {
         Ok(_)=>{
-            let response = RoutineModel {
+            let _response = RoutineModel {
                 id: String::from("id"),
                 branch: request.branch,
                 class_type: String::from(""),
@@ -36,7 +36,7 @@ async fn get_student_routine_by_day(query: Query<GetStudentRoutineByDay>) -> imp
                 day: 2,
                 semester: 2
             };
-            HttpResponse::Ok().status(StatusCode::OK).body(format!("{:?}",response))
+            HttpResponse::Ok().status(StatusCode::OK).body(format!("{:?}",req))
         },
         Err(_err)=>{
             HttpResponse::Ok().status(StatusCode::BAD_REQUEST).body("Type error")}

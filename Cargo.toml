@@ -7,10 +7,14 @@ edition = "2021"
 actix-web = "4.5.1"
 async-trait = "0.1.80"
 derive_more = "0.99.17"
+dotenv = "0.15.0"
+futures = "0.3.28"
 json = "0.12.4"
 serde = { version = "1.0.201", features = ["derive"] }
+tokio = { version = "1.37.0", features = ["full"] }
 uuid = "1.8.0"
 validator = { version = "0.18.1", features = ["derive"] }
 
-[dev-dependencies]
-cargo-watch = "8.5.2"
+[dependencies.mongodb]
+version = "2.8.2"
+features = ["tokio-runtime"]

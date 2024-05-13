@@ -1,14 +1,21 @@
 use actix_web::{App, HttpServer};
-use endpoints::{
-    admin::{get_admin, post_admin}, routine::{get_student_routine_by_day, get_routine, post_routine}
-};
+use dotenv::dotenv;
 
+mod db;
 mod schema;
 mod endpoints;
 mod validations;
 
+use endpoints::{
+    admin::{get_admin, post_admin}, routine::{get_student_routine_by_day, get_routine, post_routine}
+};
+
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
+    dotenv().ok();
+    db::test_connection().await.expect("Error connecting to database");
+    // db::db("movies").await.expect("Error fetching data");
+
     // Start the HTTP server and bind it to the specified address
     HttpServer::new(|| {
         // Create an App instance
