@@ -1,0 +1,16 @@
+[package]
+name = "rust-crud-api"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+actix-web = "4.5.1"
+async-trait = "0.1.80"
+derive_more = "0.99.17"
+json = "0.12.4"
+serde = { version = "1.0.201", features = ["derive"] }
+uuid = "1.8.0"
+validator = { version = "0.18.1", features = ["derive"] }
+
+[dev-dependencies]
+cargo-watch = "8.5.2"
